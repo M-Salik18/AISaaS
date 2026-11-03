@@ -24,8 +24,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         className={`${outfitsans.variable} h-full antialiased font-sans`}
       >
         <body className="min-h-full flex flex-col">
+          <ThemeProvider attribute="class"
+            defaultTheme="System"
+            enableColorScheme
+            disableTransitionOnChange>
+            {children}
 
-          {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
