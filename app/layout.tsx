@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Outfit, Geist } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "next-themes";
+import { cn } from "@/lib/utils";
 
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const outfitsans = Outfit({
   variable: "--font-outfit-sans",
@@ -21,15 +23,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <ClerkProvider>
       <html
         lang="en"
-        className={`${outfitsans.variable} h-full antialiased font-sans`}
+        className={cn("h-full", "antialiased", outfitsans.variable, "font-sans", geist.variable)}
+        suppressHydrationWarning
       >
         <body className="min-h-full flex flex-col">
-          <ThemeProvider attribute="class"
-            defaultTheme="System"
-            enableColorScheme
-            disableTransitionOnChange>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             {children}
-
           </ThemeProvider>
         </body>
       </html>
